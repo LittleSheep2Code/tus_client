@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cross_file/cross_file.dart';
 import 'package:http/http.dart';
-import 'package:speed_test_dart/classes/server.dart';
 import 'package:tus_client_dart/tus_client_dart.dart';
 
 abstract class TusClientBase {
@@ -17,12 +16,6 @@ abstract class TusClientBase {
 
   /// Any additional headers
   Map<String, String>? headers;
-
-  /// Upload speed in Mb/s
-  double? uploadSpeed;
-
-  /// List of [Server] that are good for testing speed
-  List<Server>? bestServers;
 
   TusClientBase(
     this.file, {
@@ -62,12 +55,6 @@ abstract class TusClientBase {
   String? generateFingerprint() {
     return file.path.replaceAll(RegExp(r"\W+"), '.');
   }
-
-  /// Sets to servers to test for upload speed
-  Future<void> setUploadTestServers();
-
-  /// Measures the upload speed of the device
-  Future<void> uploadSpeedTest();
 
   /// Override this to customize creating 'Upload-Metadata'
   String generateMetadata() {
